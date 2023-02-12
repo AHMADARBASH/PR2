@@ -23,7 +23,7 @@ class Hotely extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
-            scaffoldBackgroundColor: Color.fromARGB(255, 251, 248, 237),
+            scaffoldBackgroundColor: Color.fromARGB(255, 235, 235, 235),
             appBarTheme: AppBarTheme(
                 backgroundColor: Colors.transparent,
                 elevation: 0,
