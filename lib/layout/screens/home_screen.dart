@@ -5,6 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hotely/blocs/hotel_blocs/hotels_cubit.dart';
 import 'package:hotely/blocs/hotel_blocs/hotels_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hotely/layout/screens/hotelDetails.dart';
 import 'package:hotely/layout/widgets/loading_logo.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -106,89 +107,110 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ]),
                                     child: LoadingLogo()),
                               )
-                            : Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  padding: const EdgeInsets.all(10),
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(15),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.grey.withOpacity(0.3),
-                                            blurRadius: 4,
-                                            spreadRadius: 1,
-                                            offset: Offset(2, 2))
-                                      ]),
-                                  child: Column(
-                                    children: [
-                                      ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: CachedNetworkImage(
-                                            imageUrl: state.data[index].image,
-                                            placeholder: (context, url) =>
-                                                Container(
-                                                    width: double.infinity,
-                                                    height:
-                                                        MediaQuery.of(context)
+                            : GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).pushNamed(
+                                      HotelDetail2.routeName,
+                                      arguments: {
+                                        'image': state.data[index].image,
+                                        'rate': state.data[index].rate,
+                                        'title': state.data[index].name,
+                                      });
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(10),
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(15),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color:
+                                                  Colors.grey.withOpacity(0.3),
+                                              blurRadius: 4,
+                                              spreadRadius: 1,
+                                              offset: Offset(2, 2))
+                                        ]),
+                                    child: Column(
+                                      children: [
+                                        ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            child: Container(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.25,
+                                              child: CachedNetworkImage(
+                                                imageUrl:
+                                                    state.data[index].image,
+                                                fit: BoxFit.fitWidth,
+                                                placeholder: (context, url) =>
+                                                    Container(
+                                                        width: double.infinity,
+                                                        height: MediaQuery.of(
+                                                                    context)
                                                                 .size
                                                                 .height *
                                                             0.25,
-                                                    alignment: Alignment.center,
-                                                    child: Image.asset(
-                                                      'assets/images/logo.png',
-                                                      fit: BoxFit.contain,
-                                                    )),
-                                          )),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            state.data[index].name,
-                                            style: const TextStyle(
-                                                fontSize: 22,
-                                                fontWeight: FontWeight.bold),
-                                          )
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          RatingBar.builder(
-                                            initialRating:
-                                                state.data[index].rate,
-                                            direction: Axis.horizontal,
-                                            allowHalfRating: true,
-                                            updateOnDrag: false,
-                                            itemCount: 5,
-                                            itemBuilder: (context, _) => Icon(
-                                              Icons.star,
-                                              color: Color.fromARGB(
-                                                  255, 240, 202, 124),
-                                            ),
-                                            glow: false,
-                                            tapOnlyMode: true,
-                                            ignoreGestures: true,
-                                            onRatingUpdate: (rating) {},
-                                            itemSize: 25,
-                                          )
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            '  \$ 40',
-                                            style: TextStyle(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        child: Image.asset(
+                                                          'assets/images/logo.png',
+                                                          fit: BoxFit.contain,
+                                                        )),
+                                              ),
+                                            )),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              state.data[index].name,
+                                              style: const TextStyle(
+                                                  fontSize: 22,
+                                                  fontWeight: FontWeight.bold),
+                                            )
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            RatingBar.builder(
+                                              initialRating:
+                                                  state.data[index].rate,
+                                              direction: Axis.horizontal,
+                                              allowHalfRating: true,
+                                              updateOnDrag: false,
+                                              itemCount: 5,
+                                              itemBuilder: (context, _) => Icon(
+                                                Icons.star,
                                                 color: Color.fromARGB(
                                                     255, 240, 202, 124),
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                              ),
+                                              glow: false,
+                                              tapOnlyMode: true,
+                                              ignoreGestures: true,
+                                              onRatingUpdate: (rating) {},
+                                              itemSize: 25,
+                                            )
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              '  \$ 40',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 240, 202, 124),
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );

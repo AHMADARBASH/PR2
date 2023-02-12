@@ -21,6 +21,7 @@ class HotelsCubit extends Cubit<HotelsState> {
     } on SocketException catch (_) {
       emit(HotelsErrorState(errorMessage: 'Connection Error'));
     } catch (e) {
+      print(e);
       emit(HotelsErrorState(errorMessage: 'Unkown Error'));
     }
   }
