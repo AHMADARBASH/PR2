@@ -112,9 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Navigator.of(context).pushNamed(
                                       HotelDetail2.routeName,
                                       arguments: {
-                                        'image': state.data[index].image,
-                                        'rate': state.data[index].rate,
-                                        'title': state.data[index].name,
+                                        'hotel': state.data[index],
                                       });
                                 },
                                 child: Padding(

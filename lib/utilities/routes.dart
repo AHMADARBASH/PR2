@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:hotely/data/models/hotel.dart';
 import 'package:hotely/layout/screens/home_screen.dart';
 import 'package:hotely/layout/screens/hotelDetails.dart';
 import 'package:hotely/layout/screens/main_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generatedRoute(RouteSettings settings) {
-    final routeData = settings.arguments as Map<String, dynamic>;
     switch (settings.name) {
       case MainScreen.routeName:
         return MaterialPageRoute(builder: (_) => MainScreen());
-      // case HotelDetail2.routeName:
-      //   return MaterialPageRoute(builder: (_) => HotelDetail2());
+      case HotelDetail2.routeName:
+        var routeData = settings.arguments as Map<String, dynamic>;
+        final Hotel _hotel = routeData['hotel'];
+        return MaterialPageRoute(
+            builder: (_) => HotelDetail2(
+                  descriptionD: ['test'],
+                  idD: '1',
+                  imageD: _hotel.image,
+                  priceD: _hotel.price,
+                  ratingD: _hotel.rate,
+                  serviceD: ['1'],
+                  titleD: _hotel.name,
+                  typeD: '1',
+                  userId: '1',
+                ));
       default:
         return _errorRoute();
     }
