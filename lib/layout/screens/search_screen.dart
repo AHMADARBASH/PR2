@@ -13,7 +13,7 @@ class _SearchScreenState extends State<SearchScreen> {
   bool _filtered = false;
   double _startValue = 0;
   double _endValue = 1000;
-  bool _Pool = false;
+
   final _Duration = const Duration(milliseconds: 500);
   @override
   Widget build(BuildContext context) {
