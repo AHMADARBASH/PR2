@@ -133,34 +133,38 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ]),
                                     child: Column(
                                       children: [
-                                        ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            child: Container(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.25,
-                                              child: CachedNetworkImage(
-                                                imageUrl:
-                                                    state.data[index].image,
-                                                fit: BoxFit.fitWidth,
-                                                placeholder: (context, url) =>
-                                                    Container(
-                                                        width: double.infinity,
-                                                        height: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .height *
-                                                            0.25,
-                                                        alignment:
-                                                            Alignment.center,
-                                                        child: Image.asset(
-                                                          'assets/images/logo.png',
-                                                          fit: BoxFit.contain,
-                                                        )),
-                                              ),
-                                            )),
+                                        Hero(
+                                          tag: state.data[index].name,
+                                          child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              child: Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.25,
+                                                child: CachedNetworkImage(
+                                                  imageUrl:
+                                                      state.data[index].image,
+                                                  fit: BoxFit.fitWidth,
+                                                  placeholder: (context, url) =>
+                                                      Container(
+                                                          width:
+                                                              double.infinity,
+                                                          height: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .height *
+                                                              0.25,
+                                                          alignment:
+                                                              Alignment.center,
+                                                          child: Image.asset(
+                                                            'assets/images/logo.png',
+                                                            fit: BoxFit.contain,
+                                                          )),
+                                                ),
+                                              )),
+                                        ),
                                         const SizedBox(
                                           height: 5,
                                         ),
@@ -199,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Row(
                                           children: [
                                             Text(
-                                              '  \$ 40',
+                                              '  \$ ${state.data[index].price.round()}',
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 240, 202, 124),

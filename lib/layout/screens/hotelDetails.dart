@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -267,12 +268,12 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
         Opacity(
           opacity: (1 - shrinkOffset / expandedHeight),
           child: Hero(
-            tag: 'heroTagDetails',
-            child: new DecoratedBox(
-              decoration: new BoxDecoration(
-                image: new DecorationImage(
+            tag: title,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: new NetworkImage(img),
+                  image: CachedNetworkImageProvider(img),
                 ),
                 shape: BoxShape.rectangle,
               ),

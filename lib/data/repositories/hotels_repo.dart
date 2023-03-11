@@ -20,4 +20,10 @@ class HotelsRepository {
     });
     return final_data;
   }
+
+  // Future<List<Hotel>> searchForHotel() async {
+  //   await Duration(seconds: 1);
+  //   List<Hotel> _data = [Hotel()];
+  //   return _data
+  // }
 }

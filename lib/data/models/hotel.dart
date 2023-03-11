@@ -5,7 +5,12 @@ class Hotel {
   late double price;
   late String location;
 
-  Hotel({required this.name, required this.rate, required this.image});
+  Hotel(
+      {required this.name,
+      required this.rate,
+      required this.image,
+      required this.location,
+      required this.price});
   Hotel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     rate = double.parse(json['rate'].toString());

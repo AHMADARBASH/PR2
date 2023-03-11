@@ -13,7 +13,14 @@ class _SearchScreenState extends State<SearchScreen> {
   bool _filtered = false;
   double _startValue = 0;
   double _endValue = 1000;
-  double _endValue2 = 1000;
+  bool _PoolValue = false;
+  bool _SeaVisionValue = false;
+  bool _SaunaValue = false;
+  bool _ResturantValue = false;
+  bool _GymValue = false;
+  bool _PartyValue = false;
+  bool _ClothsCleanValue = false;
+
   final _Duration = const Duration(milliseconds: 500);
   @override
   Widget build(BuildContext context) {
@@ -103,6 +110,15 @@ class _SearchScreenState extends State<SearchScreen> {
                         onPressed: () {
                           setState(() {
                             _filtered = !_filtered;
+                            if (_filtered) {
+                              _PoolValue = false;
+                              _SeaVisionValue = false;
+                              _SaunaValue = false;
+                              _ResturantValue = false;
+                              _GymValue = false;
+                              _PartyValue = false;
+                              _ClothsCleanValue = false;
+                            }
                           });
                         },
                         icon: Icon(
@@ -139,7 +155,99 @@ class _SearchScreenState extends State<SearchScreen> {
                                         _startValue = value.start;
                                         _endValue = value.end;
                                       });
-                                    })
+                                    }),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text('Sea Vision'),
+                                    Checkbox(
+                                        activeColor: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                        value: _SeaVisionValue,
+                                        onChanged: (value) {
+                                          newSetState(
+                                            () => _SeaVisionValue = value!,
+                                          );
+                                        }),
+                                    Text('Cloths Clean'),
+                                    Checkbox(
+                                        activeColor: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                        value: _ClothsCleanValue,
+                                        onChanged: (value) {
+                                          newSetState(
+                                            () => _ClothsCleanValue = value!,
+                                          );
+                                        }),
+                                    Text('Resturant'),
+                                    Checkbox(
+                                        activeColor: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                        value: _ResturantValue,
+                                        onChanged: (value) {
+                                          newSetState(
+                                            () => _ResturantValue = value!,
+                                          );
+                                        }),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text('Pool'),
+                                    Checkbox(
+                                        activeColor: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                        value: _PoolValue,
+                                        onChanged: (value) {
+                                          newSetState(
+                                            () => _PoolValue = value!,
+                                          );
+                                        }),
+                                    Text('Gym'),
+                                    Checkbox(
+                                        activeColor: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                        value: _GymValue,
+                                        onChanged: (value) {
+                                          newSetState(
+                                            () => _GymValue = value!,
+                                          );
+                                        }),
+                                    Text('Party'),
+                                    Checkbox(
+                                        activeColor: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                        value: _PartyValue,
+                                        onChanged: (value) {
+                                          newSetState(
+                                            () => _PartyValue = value!,
+                                          );
+                                        }),
+                                    Text('Sauna'),
+                                    Checkbox(
+                                        activeColor: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                        value: _SaunaValue,
+                                        onChanged: (value) {
+                                          newSetState(
+                                            () => _SaunaValue = value!,
+                                          );
+                                        }),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
