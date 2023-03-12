@@ -44,9 +44,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   tween: Tween<double>(begin: 0, end: 1),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                              blurRadius: 1,
+                              spreadRadius: 1,
+                              color: Colors.grey.withOpacity(0.2),
+                              offset: Offset(1, 1))
+                        ]),
                     padding: EdgeInsets.all(10),
                     child: Text(
                       'Top rated Hotels',
@@ -230,13 +236,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         tween: Tween<double>(begin: 0, end: 1),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 1,
+                                    spreadRadius: 1,
+                                    color: Colors.grey.withOpacity(0.2),
+                                    offset: Offset(1, 1))
+                              ]),
                           padding: EdgeInsets.all(10),
                           child: Text(
                             'Best Offers',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         builder: (context, value, child) {
