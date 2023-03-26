@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hotely/blocs/bottom_nav_bar/bottom_nav_bar_cubit.dart';
 import 'package:hotely/blocs/bottom_nav_bar/bottom_nav_bar_states.dart';
@@ -8,7 +6,7 @@ import 'package:hotely/layout/screens/favorites_screen.dart';
 import 'package:hotely/layout/screens/home_screen.dart';
 import 'package:hotely/layout/screens/search_screen.dart';
 import 'package:hotely/layout/screens/settings_screen.dart';
-import 'package:hotely/layout/widgets/bottom_nav_bar.dart';
+import 'package:hotely/layout/widgets/google_nav_bar.dart';
 
 class MainScreen extends StatefulWidget {
   static const String routeName = '/';
@@ -19,7 +17,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final _pages = [
+  final _pages = const [
     HomeScreen(),
     SearchScreen(),
     FavoritesScreen(),
@@ -34,6 +32,6 @@ class _MainScreenState extends State<MainScreen> {
             return _pages[state.index];
           },
         ),
-        bottomNavigationBar: BottomNavBar());
+        bottomNavigationBar: BottomNavBar2());
   }
 }

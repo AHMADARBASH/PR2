@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                   : CarouselSlider.builder(
                       options: CarouselOptions(
-                        height: MediaQuery.of(context).size.height * 0.4,
+                        height: MediaQuery.of(context).size.height * 0.42,
                         enlargeCenterPage: true,
                         disableCenter: true,
                       ),
@@ -193,7 +193,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               allowHalfRating: true,
                                               updateOnDrag: false,
                                               itemCount: 5,
-                                              itemBuilder: (context, _) => Icon(
+                                              itemBuilder: (context, _) =>
+                                                  const Icon(
                                                 Icons.star,
                                                 color: Color.fromARGB(
                                                     255, 240, 202, 124),
@@ -203,6 +204,152 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ignoreGestures: true,
                                               onRatingUpdate: (rating) {},
                                               itemSize: 25,
+                                            ),
+                                            const Spacer(),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: Colors.white,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                        color: Colors.grey
+                                                            .withOpacity(0.3),
+                                                        blurRadius: 4,
+                                                        spreadRadius: 1,
+                                                        offset: Offset(2, 2))
+                                                  ]),
+                                              child: IconButton(
+                                                  onPressed: () {
+                                                    showModalBottomSheet(
+                                                        context: context,
+                                                        shape:
+                                                            const RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    20),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    20),
+                                                          ),
+                                                        ),
+                                                        builder:
+                                                            (_) => SizedBox(
+                                                                  height: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .height *
+                                                                      0.3,
+                                                                  child: Column(
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        height:
+                                                                            10,
+                                                                      ),
+                                                                      Container(
+                                                                        width:
+                                                                            50,
+                                                                        height:
+                                                                            5,
+                                                                        decoration: BoxDecoration(
+                                                                            color:
+                                                                                Colors.grey,
+                                                                            borderRadius: BorderRadius.circular(10)),
+                                                                      ),
+                                                                      SizedBox(
+                                                                        height:
+                                                                            20,
+                                                                      ),
+                                                                      Text(
+                                                                        'you are not signed in to set favorite item',
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontSize:
+                                                                              16,
+                                                                        ),
+                                                                      ),
+                                                                      SizedBox(
+                                                                        height:
+                                                                            20,
+                                                                      ),
+                                                                      ElevatedButton
+                                                                          .icon(
+                                                                        icon: Icon(
+                                                                            Icons.login),
+                                                                        onPressed:
+                                                                            () {},
+                                                                        label: Text(
+                                                                            'Sign in'),
+                                                                        style: ElevatedButton.styleFrom(
+                                                                            foregroundColor:
+                                                                                Theme.of(context).colorScheme.primary,
+                                                                            backgroundColor: Colors.white),
+                                                                      ),
+                                                                      SizedBox(
+                                                                        height:
+                                                                            10,
+                                                                      ),
+                                                                      Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        children: [
+                                                                          Container(
+                                                                            width:
+                                                                                100,
+                                                                            height:
+                                                                                1,
+                                                                            color:
+                                                                                Colors.grey.withOpacity(0.4),
+                                                                            margin:
+                                                                                EdgeInsets.symmetric(horizontal: 20),
+                                                                          ),
+                                                                          Text(
+                                                                            'or',
+                                                                            style:
+                                                                                TextStyle(
+                                                                              color: Colors.grey.withOpacity(0.8),
+                                                                            ),
+                                                                          ),
+                                                                          Container(
+                                                                            width:
+                                                                                100,
+                                                                            height:
+                                                                                1,
+                                                                            color:
+                                                                                Colors.grey.withOpacity(0.4),
+                                                                            margin:
+                                                                                EdgeInsets.symmetric(horizontal: 20),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      SizedBox(
+                                                                        height:
+                                                                            20,
+                                                                      ),
+                                                                      ElevatedButton
+                                                                          .icon(
+                                                                        icon: Icon(
+                                                                            Icons.person_add),
+                                                                        onPressed:
+                                                                            () {},
+                                                                        label: Text(
+                                                                            'Sign up'),
+                                                                        style: ElevatedButton.styleFrom(
+                                                                            foregroundColor:
+                                                                                Theme.of(context).colorScheme.primary,
+                                                                            backgroundColor: Colors.white),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ));
+                                                  },
+                                                  icon: Icon(
+                                                    Icons.favorite_border,
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .primary,
+                                                  )),
                                             )
                                           ],
                                         ),
