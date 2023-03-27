@@ -88,30 +88,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                   : CarouselSlider.builder(
                       options: CarouselOptions(
-                        height: MediaQuery.of(context).size.height * 0.42,
-                        enlargeCenterPage: true,
-                        disableCenter: true,
-                      ),
+                          height: MediaQuery.of(context).size.height * 0.42,
+                          enlargeCenterPage: true,
+                          disableCenter: true,
+                          autoPlay: true),
                       itemCount: state.data.isEmpty ? 3 : state.data.length,
                       itemBuilder: (context, index, realIndex) {
                         return state is HotelsLoadingState
-                            ? Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                    padding: const EdgeInsets.all(10),
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(15),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color:
-                                                  Colors.grey.withOpacity(0.3),
-                                              blurRadius: 4,
-                                              spreadRadius: 1,
-                                              offset: Offset(2, 2))
-                                        ]),
-                                    child: LoadingLogo()),
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                    color:
+                                        Theme.of(context).colorScheme.primary),
                               )
                             : GestureDetector(
                                 onTap: () {

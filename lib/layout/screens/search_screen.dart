@@ -38,6 +38,7 @@ class _SearchScreenState extends State<SearchScreen> {
             children: [
               FadeInDown(
                 duration: _Duration,
+                curve: Curves.easeOutQuart,
                 child: Row(
                   children: [
                     StatefulBuilder(
