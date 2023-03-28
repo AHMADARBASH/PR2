@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hotely/blocs/hotel_blocs/hotels_cubit.dart';
 import 'package:hotely/blocs/hotel_blocs/hotels_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Featured'),
+          title: Text(
+            'Featured',
+            style: GoogleFonts.robotoSlab(),
+          ),
         ),
         body: Column(
           children: [
@@ -56,7 +60,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: EdgeInsets.all(10),
                     child: Text(
                       'Top rated Hotels',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: GoogleFonts.robotoSlab()
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
                   builder: (context, value, child) {
@@ -382,9 +387,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: EdgeInsets.all(10),
                           child: Text(
                             'Best Offers',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: GoogleFonts.robotoSlab()
+                                .copyWith(fontWeight: FontWeight.bold),
                           ),
                         ),
                         builder: (context, value, child) {
