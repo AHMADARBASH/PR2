@@ -13,6 +13,11 @@ class HotelsLoadingState extends HotelsState {
   HotelsLoadingState() : super(data: []);
 }
 
+class HotelsSearchState extends HotelsState {
+  late List<Hotel> data;
+  HotelsSearchState({required this.data}) : super(data: data);
+}
+
 class HotelsErrorState extends HotelsState {
   String errorMessage;
   HotelsErrorState({required this.errorMessage}) : super(data: []);

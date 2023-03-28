@@ -27,10 +27,46 @@ class HotelsCubit extends Cubit<HotelsState> {
 
   Future<void> searchForHotel() async {
     emit(HotelsLoadingState());
-    final data;
+    List<Hotel> data = [
+      Hotel(
+          name: 'Sheraton',
+          rate: 4.5,
+          image:
+              'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80',
+          location: 'Syria - Damascus',
+          price: 100),
+      Hotel(
+          name: 'Sheraton',
+          rate: 4.5,
+          image:
+              'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80',
+          location: 'Syria - Damascus',
+          price: 100),
+      Hotel(
+          name: 'Sheraton',
+          rate: 4.5,
+          image:
+              'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80',
+          location: 'Syria - Damascus',
+          price: 100),
+      Hotel(
+          name: 'Sheraton',
+          rate: 4.5,
+          image:
+              'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80',
+          location: 'Syria - Damascus',
+          price: 100),
+      Hotel(
+          name: 'Sheraton',
+          rate: 4.5,
+          image:
+              'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80',
+          location: 'Syria - Damascus',
+          price: 100),
+    ];
     try {
-      data = await repo.getTop5Hotels();
-      emit(HotelsUpdatedState(data: data));
+      // data = await repo.getTop5Hotels();
+      emit(HotelsSearchState(data: data));
     } on HTTPException catch (e) {
       emit(HotelsErrorState(errorMessage: e.toString()));
     } on SocketException catch (_) {
