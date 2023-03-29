@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hotely/blocs/hotel_blocs/hotels_cubit.dart';
-import 'package:hotely/blocs/hotel_blocs/hotels_state.dart';
+import 'package:hotely/blocs/hotels/hotels_cubit.dart';
+import 'package:hotely/blocs/hotels/hotels_state.dart';
+import 'package:shimmer/shimmer.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -276,9 +277,101 @@ class _SearchScreenState extends State<SearchScreen> {
                   height: 10,
                 ),
                 state is HotelsLoadingState
-                    ? Center(
-                        child: CircularProgressIndicator(
-                          color: Theme.of(context).colorScheme.primary,
+                    ? Expanded(
+                        flex: 8,
+                        child: ListView.builder(
+                          itemCount: 5,
+                          itemBuilder: (context, index) => Container(
+                            width: double.infinity,
+                            height: MediaQuery.of(context).size.height * 0.12,
+                            margin: EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 2.5),
+                            padding: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.3),
+                                      blurRadius: 4,
+                                      spreadRadius: 1,
+                                      offset: Offset(2, 2))
+                                ],
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Row(children: [
+                              Expanded(
+                                  flex: 1,
+                                  child: Shimmer.fromColors(
+                                    baseColor: Colors.grey[200]!,
+                                    highlightColor: Colors.white,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[600],
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      margin: EdgeInsets.all(5),
+                                    ),
+                                  )),
+                              Expanded(
+                                  flex: 3,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    margin: EdgeInsets.all(5),
+                                    padding: EdgeInsets.all(5),
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Shimmer.fromColors(
+                                            baseColor: Colors.grey[200]!,
+                                            highlightColor: Colors.white,
+                                            child: Container(
+                                              width: 100,
+                                              height: 10,
+                                              decoration: BoxDecoration(
+                                                color: Colors.grey[600],
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                              margin: EdgeInsets.all(5),
+                                            ),
+                                          ),
+                                          Shimmer.fromColors(
+                                            baseColor: Colors.grey[200]!,
+                                            highlightColor: Colors.white,
+                                            child: Container(
+                                              width: 200,
+                                              height: 10,
+                                              decoration: BoxDecoration(
+                                                color: Colors.grey[600],
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                              margin: EdgeInsets.all(5),
+                                            ),
+                                          ),
+                                          Shimmer.fromColors(
+                                            baseColor: Colors.grey[200]!,
+                                            highlightColor: Colors.white,
+                                            child: Container(
+                                              width: 150,
+                                              height: 10,
+                                              decoration: BoxDecoration(
+                                                color: Colors.grey[600],
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                              margin: EdgeInsets.all(5),
+                                            ),
+                                          ),
+                                        ]),
+                                  )),
+                            ]),
+                          ),
                         ),
                       )
                     : state is HotelsSearchState

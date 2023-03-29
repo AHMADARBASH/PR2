@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hotely/blocs/auth/auth_cubit.dart';
 import 'package:hotely/blocs/bottom_nav_bar/bottom_nav_bar_cubit.dart';
-import 'package:hotely/blocs/hotel_blocs/hotels_cubit.dart';
+import 'package:hotely/blocs/hotels/hotels_cubit.dart';
+import 'package:hotely/data/helpers/cache_helper.dart';
 import 'package:hotely/layout/screens/main_screen.dart';
 import 'package:hotely/utilities/routes.dart';
 
-void main() {
-  runApp(Hotely());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await CachedData.init();
+  runApp(const Hotely());
 }
 
 class Hotely extends StatelessWidget {
@@ -16,18 +20,23 @@ class Hotely extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => BottomNavBarCubit()),
-        BlocProvider(
+        BlocProvider<BottomNavBarCubit>(
+          create: (context) => BottomNavBarCubit(),
+        ),
+        BlocProvider<HotelsCubit>(
           create: (context) => HotelsCubit(),
-        )
+        ),
+        BlocProvider<AuthCubit>(
+          create: (context) => AuthCubit(),
+        ),
       ],
       child: MaterialApp(
         theme: ThemeData(
             colorScheme: Theme.of(context).colorScheme.copyWith(
-                primary: Color.fromARGB(255, 240, 202, 124),
+                primary: const Color.fromARGB(255, 240, 202, 124),
                 secondary: Colors.white),
-            scaffoldBackgroundColor: Color.fromARGB(255, 235, 235, 235),
-            appBarTheme: AppBarTheme(
+            scaffoldBackgroundColor: const Color.fromARGB(255, 235, 235, 235),
+            appBarTheme: const AppBarTheme(
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 titleTextStyle: TextStyle(
@@ -35,7 +44,7 @@ class Hotely extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 25))),
         debugShowCheckedModeBanner: false,
-        home: MainScreen(),
+        home: const MainScreen(),
         onGenerateRoute: RouteGenerator.generatedRoute,
       ),
     );
