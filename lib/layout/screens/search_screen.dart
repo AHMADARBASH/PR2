@@ -417,21 +417,11 @@ class _SearchScreenState extends State<SearchScreen> {
                                                     flex: 1,
                                                     child: Container(
                                                       decoration: BoxDecoration(
-                                                          color: Colors.red,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          image:
-                                                              DecorationImage(
-                                                                  image:
-                                                                      NetworkImage(
-                                                                    state
-                                                                        .data[
-                                                                            index]
-                                                                        .image,
-                                                                  ),
-                                                                  fit: BoxFit
-                                                                      .cover)),
+                                                        color: Colors.red,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                      ),
                                                       margin: EdgeInsets.all(5),
                                                     )),
                                                 Expanded(
@@ -465,7 +455,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                                             ),
                                                             Text(
                                                               state.data[index]
-                                                                  .location,
+                                                                  .city,
                                                               style: GoogleFonts
                                                                       .robotoSlab()
                                                                   .copyWith(
@@ -480,7 +470,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                                                   state
                                                                       .data[
                                                                           index]
-                                                                      .rate,
+                                                                      .reviews,
                                                               direction: Axis
                                                                   .horizontal,
                                                               allowHalfRating:
