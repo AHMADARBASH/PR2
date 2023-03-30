@@ -7,7 +7,9 @@ import 'package:hotely/blocs/hotels/hotels_cubit.dart';
 import 'package:hotely/blocs/hotels/hotels_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hotely/layout/screens/hotelDetails.dart';
+import 'package:hotely/layout/widgets/loading_hotel_widget.dart';
 import 'package:hotely/layout/widgets/loading_logo.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../widgets/login_signin_widget.dart';
 
@@ -21,13 +23,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    BlocProvider.of<HotelsCubit>(context).getTop5Hotels();
+    BlocProvider.of<HotelsCubit>(context).getTopHotels();
     super.initState();
   }
 
   bool _firstAnimationEnd = false;
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
+    final textStyle = GoogleFonts.robotoSlab();
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -95,18 +99,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                   : CarouselSlider.builder(
                       options: CarouselOptions(
-                          height: MediaQuery.of(context).size.height * 0.42,
+                          height: MediaQuery.of(context).size.height * 0.35,
                           enlargeCenterPage: true,
                           disableCenter: true,
                           autoPlay: true),
                       itemCount: state.data.isEmpty ? 3 : state.data.length,
                       itemBuilder: (context, index, realIndex) {
                         return state is HotelsLoadingState
-                            ? Center(
-                                child: CircularProgressIndicator(
-                                    color:
-                                        Theme.of(context).colorScheme.primary),
-                              )
+                            ? Center(child: LoadingHotelWidget())
                             : GestureDetector(
                                 onTap: () {
                                   Navigator.of(context).pushNamed(
@@ -115,74 +115,81 @@ class _HomeScreenState extends State<HomeScreen> {
                                         'hotel': state.data[index],
                                       });
                                 },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(10),
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(15),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color:
-                                                  Colors.grey.withOpacity(0.3),
-                                              blurRadius: 4,
-                                              spreadRadius: 1,
-                                              offset: Offset(2, 2))
-                                        ]),
-                                    child: Column(
+                                child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.8,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.35,
+                                  margin: EdgeInsets.all(10),
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            blurRadius: 1,
+                                            spreadRadius: 1,
+                                            color: Colors.grey.withOpacity(0.2),
+                                            offset: Offset(2, 2))
+                                      ]),
+                                  child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Hero(
-                                          tag: state.data[index].name,
-                                          child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              child: Container(
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.25,
-                                                child: CachedNetworkImage(
-                                                  imageUrl:
-                                                      state.data[index].image,
-                                                  fit: BoxFit.fitWidth,
-                                                  placeholder: (context, url) =>
-                                                      Container(
-                                                          width:
-                                                              double.infinity,
-                                                          height: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .height *
-                                                              0.25,
-                                                          alignment:
-                                                              Alignment.center,
-                                                          child: Image.asset(
-                                                            'assets/images/logo.png',
-                                                            fit: BoxFit.contain,
-                                                          )),
-                                                ),
-                                              )),
+                                        Text(
+                                          state.data[index].name,
+                                          style: textStyle.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 30),
                                         ),
-                                        const SizedBox(
-                                          height: 5,
+                                        SizedBox(
+                                          height: 10,
                                         ),
                                         Row(
                                           children: [
+                                            Icon(
+                                              Icons.location_on,
+                                              color: primary,
+                                            ),
                                             Text(
-                                              state.data[index].name,
-                                              style: const TextStyle(
-                                                  fontSize: 22,
-                                                  fontWeight: FontWeight.bold),
-                                            )
+                                              ' ${state.data[index].country} - ${state.data[index].city}',
+                                              style: textStyle,
+                                            ),
                                           ],
                                         ),
                                         Row(
                                           children: [
+                                            Icon(
+                                              Icons.phone,
+                                              color: primary,
+                                            ),
+                                            Text(
+                                              state.data[index].phone,
+                                              style: textStyle,
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          'description:',
+                                          style: textStyle,
+                                        ),
+                                        Text(
+                                          state.data[index].description,
+                                          style: textStyle,
+                                        ),
+                                        Spacer(),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
                                             RatingBar.builder(
                                               initialRating:
-                                                  state.data[index].rate,
+                                                  state.data[index].reviews,
                                               direction: Axis.horizontal,
                                               allowHalfRating: true,
                                               updateOnDrag: false,
@@ -199,7 +206,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                               onRatingUpdate: (rating) {},
                                               itemSize: 25,
                                             ),
-                                            const Spacer(),
                                             Container(
                                               decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
@@ -243,20 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             )
                                           ],
                                         ),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              '  \$ ${state.data[index].price.round()}',
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 240, 202, 124),
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                      ]),
                                 ),
                               );
                       },

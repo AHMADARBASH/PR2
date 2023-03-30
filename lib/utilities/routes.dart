@@ -9,21 +9,21 @@ class RouteGenerator {
     switch (settings.name) {
       case MainScreen.routeName:
         return MaterialPageRoute(builder: (_) => MainScreen());
-      case HotelDetail2.routeName:
-        var routeData = settings.arguments as Map<String, dynamic>;
-        final Hotel _hotel = routeData['hotel'];
-        return MaterialPageRoute(
-            builder: (_) => HotelDetail2(
-                  descriptionD: ['test'],
-                  idD: '1',
-                  imageD: _hotel.image,
-                  priceD: _hotel.price,
-                  ratingD: _hotel.rate,
-                  serviceD: ['1'],
-                  titleD: _hotel.name,
-                  typeD: '1',
-                  userId: '1',
-                ));
+      // case HotelDetail2.routeName:
+      //   var routeData = settings.arguments as Map<String, dynamic>;
+      //   final Hotel _hotel = routeData['hotel'];
+      //   return MaterialPageRoute(
+      //       builder: (_) => HotelDetail2(
+      //             descriptionD: ['test'],
+      //             idD: '1',
+      //             imageD: _hotel.image,
+      //             priceD: _hotel.price,
+      //             ratingD: _hotel.rate,
+      //             serviceD: ['1'],
+      //             titleD: _hotel.name,
+      //             typeD: '1',
+      //             userId: '1',
+      //           ));
       default:
         return _errorRoute();
     }
