@@ -18,8 +18,8 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final searchController = TextEditingController();
   bool _filtered = false;
-  double _startValue = 0;
-  double _endValue = 1000;
+  double _startValue = 1;
+  double _endValue = 20000;
   bool _PoolValue = false;
   bool _SeaVisionValue = false;
   bool _SaunaValue = false;
@@ -36,7 +36,7 @@ class _SearchScreenState extends State<SearchScreen> {
         floatingActionButton: FloatingActionButton(
             backgroundColor: Theme.of(context).colorScheme.primary,
             onPressed: () {
-              BlocProvider.of<HotelsCubit>(context).searchForHotel();
+              BlocProvider.of<HotelsCubit>(context).searchForHotelByName(searchController.text);
             },
             child: Icon(Icons.search)),
         appBar: AppBar(
@@ -49,7 +49,7 @@ class _SearchScreenState extends State<SearchScreen> {
               children: [
                 FadeInDown(
                   duration: _Duration,
-                  curve: Curves.easeOutQuart,
+                 // curve: Curves.easeOutQuart,
                   child: Row(
                     children: [
                       StatefulBuilder(
@@ -148,7 +148,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 _filtered
                     ? StatefulBuilder(
                         builder: (context, newSetState) => FadeIn(
-                          curve: Curves.easeOutQuart,
+                         // curve: Curves.easeOutQuart,
                           duration: _Duration,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -158,8 +158,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                 style: GoogleFonts.robotoSlab().copyWith(),
                               ),
                               RangeSlider(
-                                  max: 1000,
-                                  min: 0,
+                                  max: 20000,
+                                  min: 1,
                                   divisions: 100,
                                   values: RangeValues(_startValue, _endValue),
                                   onChangeEnd: (value) => newSetState(() {}),
@@ -258,7 +258,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        BlocProvider.of<HotelsCubit>(context).searchForHotelByPrice(_startValue,_endValue);
+                                      },
                                       child: Text(
                                         'apply',
                                         style:
@@ -387,7 +389,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                           child: FadeInUp(
                                             duration:
                                                 Duration(milliseconds: 500),
-                                            curve: Curves.easeOutQuart,
+                                           // curve: Curves.easeOutQuart,
                                             delay: Duration(
                                                 milliseconds: 100 * index),
                                             child: Container(
