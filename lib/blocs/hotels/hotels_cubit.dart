@@ -25,12 +25,28 @@ class HotelsCubit extends Cubit<HotelsState> {
     }
   }
 
-  Future<void> searchForHotel() async {
+  Future<void> searchForHotelByName(name) async {
     emit(HotelsLoadingState());
     await Future.delayed(Duration(seconds: 3));
     List<Hotel> data = [];
     try {
-      // data = await repo.getTop5Hotels();
+       data = await repo.searchForHotels(name);
+      emit(HotelsSearchState(data: data));
+    } on HTTPException catch (e) {
+      emit(HotelsErrorState(errorMessage: e.toString()));
+    } on SocketException catch (_) {
+      emit(HotelsErrorState(errorMessage: 'Connection Error'));
+    } catch (e) {
+      print(e);
+      emit(HotelsErrorState(errorMessage: 'Unkown Error'));
+    }
+  }
+  Future<void> searchForHotelByPrice(sPrice,ePrice) async {
+    emit(HotelsLoadingState());
+    await Future.delayed(Duration(seconds: 3));
+    List<Hotel> data = [];
+    try {
+       data = await repo.searchForHotelsByPrice(sPrice,ePrice);
       emit(HotelsSearchState(data: data));
     } on HTTPException catch (e) {
       emit(HotelsErrorState(errorMessage: e.toString()));
